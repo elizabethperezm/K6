@@ -1,0 +1,25 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "test",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "na"
+  },
+  "keywords": [
+    "na"
+  ],
+  "author": "eli",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "k6": "^0.0.0"
+  },
+  "devDependencies": {
+    "k6-html-reporter": "^1.0.4"
+  }
+}
