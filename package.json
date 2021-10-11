@@ -4,7 +4,7 @@
   "description": "test",
   "main": "test",
   "scripts": {
-    "test": "test"
+    "test:all": "k6 run test/start.js"
   },
   "repository": {
     "type": "git",
