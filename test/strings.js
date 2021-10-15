@@ -10,30 +10,17 @@ export let options = {
 }; 
 export default function() {
 let query = `
-query GetCharactersCollection($input: ContentInput!) {
-  collection(input: $input) {
-    id
-    title
+query LocalizedStringsQuery($input: LocalizedStringsInput) {
+  localizedStrings(input: $input) {
+    totalItems
+    pageIndex
     items {
-      id
-      title
-      ... on Screen {
-        path
-        series {
-          id
-          title
-          __typename
-        }
-        images {
-          class
-          uri
-          __typename
-        }
-        __typename
-      }
-      __typename
+      key
+      language
+      value
+      createdAt
+      updatedAt
     }
-    __typename
   }
 }`;
 
@@ -43,7 +30,8 @@ let headers = {
 };
 let variables = {
   "input": {
-    "id": "lfl-characters"
+    "language": "spa",
+    "count": 100
   }
 };
 let res = http.post('https://prod-dkids-otto-api.discoverykidsplus.com/api/client/gql', JSON.stringify({ query: query, variables:variables}), { headers: headers },);
@@ -51,14 +39,14 @@ let res = http.post('https://prod-dkids-otto-api.discoverykidsplus.com/api/clien
 sleep(1)
     check(res,{
         'Status 200': (r) => r.status === 200,
-        'Characters collection Especial Musical is displayed': (r) => r.body.includes("Mini Beat Power Rockers")
+        'Spanish is displayed': (r) => r.body.includes("spa")
      });
 }
 
 export function handleSummary(data) {
 	console.log('Preparing the end-of-test summary...');
 	return {
-	  "Reports/GetCharactersCollectionOtto.html": htmlReport(data),
+	  "Reports/StringsOtto.html": htmlReport(data),
 	  stdout: textSummary(data, { indent: " ", enableColors: true }),
 	};
   }
